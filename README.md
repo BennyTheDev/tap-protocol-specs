@@ -24,7 +24,7 @@ The endpoint description will be published in the coming days on Github.
 As mentioned above, TAP tokens work in the exact same way as BRC-20 tokens. There are however a couple of minor modifications required for indexers:
 
 || TAP | BRC-20 |
-|| ------------- | ------------- |
+|-------------| ------------- | ------------- |
 | Allowed ticker lengths | 3 and 5 to 32 (UTF16)  | 4 letters |
 | Protocol | tap  | brc-20  |
 | Deploy op | token-deploy  | deploy  |
