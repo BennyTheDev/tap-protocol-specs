@@ -21,3 +21,9 @@ The endpoint description will be published in the coming days on Github.
 
 #### Specs
 
+As mentioned above, TAP tokens work in the exact same way as BRC-20 tokens. There are however a couple of minor modifications required for indexers:
+
+| TAP | BRC-20 |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
