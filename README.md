@@ -25,5 +25,5 @@ As mentioned above, TAP tokens work in the exact same way as BRC-20 tokens. Ther
 
 | TAP | BRC-20 |
 | ------------- | ------------- |
-| Content Cell  | Content Cell  |
+| Allowed ticker lengths 3 and 5 to 32 (1, 2 and 4 reserved, everything allowed)  | 4 letters |
 | Content Cell  | Content Cell  |
