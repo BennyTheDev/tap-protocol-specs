@@ -37,4 +37,9 @@ Internally, there exists a new operation called "transfer-send", which enables m
 
 The specs for "transfer-send" are defined as follows:
 
+- Users inscribe a "transfer-send" inscription to their Bitcoin address.
+- After the transaction confirmed, the inscription has to be resent to the same address for confirmation (tapping).
+- Upon tapping, the Bitcoin address must own the the amounts of tokens that are given with the inscription.
+- Only if the "transfer-send" inscription is tapped, sending tokens will be performed.
 
+  
