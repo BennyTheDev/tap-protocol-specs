@@ -17,7 +17,7 @@ Internal: Users benefit from features such as token staking and swaps. Mass-send
 
 Alongside these specs, there is already TAP protocol tracking available on https://trac.network. 
 
-The endpoint description will be published in the coming days on Github.
+The description for the public endpoint will be published in the coming days on Github. This allows developers to embrace the new standard. After the official release of Trac, developers may self-host TAP tracking and create their own endpoints.
 
 # Specs
 #### External
