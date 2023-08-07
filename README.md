@@ -33,13 +33,44 @@ As mentioned above, TAP tokens work in the exact same way as BRC-20 tokens. Ther
 
 #### Internal
 
-Internally, there exists a new operation called "transfer-send", which enables mass-transfer of different tokens to many recipients.
+Internally, there exists a new function called "token-send", which enables mass-transfer of different tokens to many recipients.
 
-The specs for "transfer-send" are defined as follows:
+There will be more internal functions, so it may be useful to check back here once in a while.
 
-- Users inscribe a "transfer-send" inscription to their Bitcoin address.
+The specs for "token-send" are defined as follows:
+
+- Users inscribe a "token-send" inscription to their Bitcoin address.
 - After the transaction confirmed, the inscription has to be resent to the same address for confirmation (tapping).
 - Upon tapping, the Bitcoin address must own the the amounts of tokens that are given with the inscription.
-- Only if the "transfer-send" inscription is tapped, sending tokens will be performed.
+- Only if the "token-send" inscription is tapped, sending tokens will be performed.
+- The receiver addresses must be carefully validated: must be valid Bitcoin addresses, trimming is allowed, addresses starting with bc1 have to be lowercased.
+- "token-send" is atomic upon inscribing (before tapping): all amounts, tickers and addresses must be valid.
+- Upon tapping, invalid token sends may be skipped (e.g. insufficient funds).
 
-  
+#### Example
+
+The below example will send 1000 tap tokens to each address. Tokens and amounts can be mixed.
+There is no restriction on the amount if items (receivers).
+
+```javascript
+{
+  "p" : "tap",
+  "op" : "token-send",
+  "items" : [
+     {
+      "tick": "tap",
+      "amt": "10000",
+      "address" : "bc1p9lpne8pnzq87dpygtqdd9vd3w28fknwwgv362xff9zv4ewxg6was504w20"
+     },
+     {
+      "tick": "tap",
+      "amt": "10000",
+      "address" : "bc1p063utyzvjuhkn0g06l5xq6e9nv6p4kjh5yxrwsr94de5zfhrj7csns0aj4"
+     }
+  ]
+}
+```
+
+#### Outlook
+
+This document and the tracking for the TAP protocol will be continuously worked on and updated. Feel free to join the Discord if you have questions: https://discord.gg/sPyYDa5q6P
