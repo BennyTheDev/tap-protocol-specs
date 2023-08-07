@@ -46,6 +46,7 @@ The specs for "token-send" are defined as follows:
 - The receiver addresses must be carefully validated: must be valid Bitcoin addresses, trimming is allowed, addresses starting with bc1 have to be lowercased.
 - "token-send" is atomic upon inscribing (before tapping): all amounts, tickers and addresses must be valid.
 - Upon tapping, invalid token sends may be skipped (e.g. insufficient funds).
+- Each successful token send must credit the given amounts to recipient and be removed from the sender's balance.
 
 #### Example
 
