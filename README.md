@@ -30,3 +30,11 @@ As mentioned above, TAP tokens work in the exact same way as BRC-20 tokens. Ther
 | Deploy op | token-deploy  | deploy  |
 | Mint op | token-mint  | mint  |
 | Transfer op | token-transfer  | transfer  |
+
+#### Internal
+
+Internally, there exists a new operation called "transfer-send", which enables mass-transfer of different tokens to many recipients.
+
+The specs for "transfer-send" are defined as follows:
+
+
