@@ -81,7 +81,7 @@ The specs for "token-send" are defined as follows:
 #### Example
 
 The below example will send 1000 tap tokens to each address. Tokens and amounts can be mixed.
-There is no restriction on the amount if items (receivers).
+There is no restriction on the amount of items (receivers).
 
 ```javascript
 {
