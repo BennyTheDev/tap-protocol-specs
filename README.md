@@ -31,6 +31,36 @@ As mentioned above, TAP tokens work in the exact same way as BRC-20 tokens. Ther
 | Mint op | token-mint  | mint  |
 | Transfer op | token-transfer  | transfer  |
 
+#### Examples
+
+```javascript
+{ 
+  "p": "tap",
+  "op": "token-deploy",
+  "tick": "tap",
+  "max": "21000000",
+  "lim": "1000"
+}
+```
+
+```javascript
+{ 
+  "p": "tap",
+  "op": "token-mint",
+  "tick": "tap",
+  "amt": "1000"
+}
+```
+
+```javascript
+{ 
+  "p": "tap",
+  "op": "token-transfer",
+  "tick": "tap",
+  "amt": "100"
+}
+```
+
 #### Internal
 
 Internally, there exists a new function called "token-send", which enables mass-transfer of different tokens to many recipients.
