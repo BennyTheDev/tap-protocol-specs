@@ -7,7 +7,7 @@ The goal of TAP is not to replace or compete with BRC-20 but instead embraces it
 
 The BRC-20 ticker lengths 1,2 and 4 are reserved for future interordinal bridging between BRC-20 and TAP Tokens and cannot be deployed on TAP.
 
-#### Structure
+# Structure
 
 TAP consists of two parts, external and internal. The external part acts in the exact same way like BRC-20 does. 
 
@@ -19,8 +19,8 @@ Alongside these specs, there is already TAP protocol tracking available on https
 
 The endpoint description will be published in the coming days on Github.
 
-#### Specs
-
+# Specs
+#### External
 As mentioned above, TAP tokens work in the exact same way as BRC-20 tokens. There are however a couple of minor modifications required for indexers:
 
 || TAP | BRC-20 |
