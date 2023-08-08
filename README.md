@@ -15,7 +15,7 @@ External: Marketplaces clone their existing BRC-20 infrastructure to get connect
 
 Internal: Users benefit from features such as token staking and swaps. Mass-sending of tokens are already available. The community will decide through the use of $TRAC (BRC-20) which features will be added or updated.
 
-Since neither BRC20 nor TAP tokens are "cursed-aware", indexers with cursed support need to check for negative inscription numbers to separate cursed tokens from non-cursed ones. [added Aug. 8th, 2023]
+Since neither BRC20 nor TAP tokens are "cursed-aware", indexers with non-cursed support need to check for negative inscription numbers to separate cursed tokens from non-cursed ones. [added Aug. 8th, 2023]
 
 Alongside these specs, there is already TAP protocol tracking available on https://trac.network. 
 
@@ -33,7 +33,7 @@ As mentioned above, TAP tokens work in the exact same way as BRC-20 tokens. Ther
 | Mint op | token-mint  | mint  |
 | Transfer op | token-transfer  | transfer  |
 
-If the indexer does _not_ support cursed tokens, a check can be added that excludes tokens derived from cursed Ordinals, for all of the external functions above. (e.g. filter if inscription number is < 0). [added Aug. 8th, 2023]
+If the indexer does _not_ support cursed tokens, a check can be added that excludes tokens derived from cursed Ordinals, for all of the external functions above. (inscription number is < 0). [added Aug. 8th, 2023]
 
 #### Examples
 
