@@ -33,7 +33,7 @@ As mentioned above, TAP tokens work in the exact same way as BRC-20 tokens. Ther
 | Mint op | token-mint  | mint  |
 | Transfer op | token-transfer  | transfer  |
 
-If the indexer does _not_ support cursed tokens, a check can be added that excludes tokens derived from cursed Ordinals (e.g. filter if inscription number is < 0). [added Aug. 8th, 2023]
+If the indexer does _not_ support cursed tokens, a check can be added that excludes tokens derived from cursed Ordinals, for all of the above external functions. (e.g. filter if inscription number is < 0). [added Aug. 8th, 2023]
 
 #### Examples
 
