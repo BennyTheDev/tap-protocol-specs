@@ -77,6 +77,7 @@ The specs for "token-send" are defined as follows:
 - "token-send" is atomic upon inscribing (before tapping): all amounts, tickers and addresses must be valid.
 - Upon tapping, invalid token sends may be skipped (e.g. insufficient funds).
 - Each successful token send must credit the given amounts to recipient and be removed from the sender's balance.
+- Since neither BRC20 nor TAP tokens are "cursed-aware", indexers need to check for negative inscription numbers to separate cursed tokens from non-cursed ones.
 
 #### Example
 
