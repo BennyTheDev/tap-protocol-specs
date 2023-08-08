@@ -33,6 +33,8 @@ As mentioned above, TAP tokens work in the exact same way as BRC-20 tokens. Ther
 | Mint op | token-mint  | mint  |
 | Transfer op | token-transfer  | transfer  |
 
+Optionally: a check in indexers can be added that excludes tokens derived from cursed Ordinals (e.g. filter if inscription number is < 0). [added Aug. 8th, 2023]
+
 #### Examples
 
 ```javascript
