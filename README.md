@@ -15,6 +15,8 @@ External: Marketplaces clone their existing BRC-20 infrastructure to get connect
 
 Internal: Users benefit from features such as token staking and swaps. Mass-sending of tokens are already available. The community will decide through the use of $TRAC (BRC-20) which features will be added or updated.
 
+Since neither BRC20 nor TAP tokens are "cursed-aware", indexers need to check for negative inscription numbers to separate cursed tokens from non-cursed ones.
+
 Alongside these specs, there is already TAP protocol tracking available on https://trac.network. 
 
 The description for the public endpoint will be published in the coming days on Github. This allows developers to embrace the new standard. After the official release of Trac, developers may self-host TAP tracking and create their own endpoints.
@@ -77,7 +79,6 @@ The specs for "token-send" are defined as follows:
 - "token-send" is atomic upon inscribing (before tapping): all amounts, tickers and addresses must be valid.
 - Upon tapping, invalid token sends may be skipped (e.g. insufficient funds).
 - Each successful token send must credit the given amounts to recipient and be removed from the sender's balance.
-- Since neither BRC20 nor TAP tokens are "cursed-aware", indexers need to check for negative inscription numbers to separate cursed tokens from non-cursed ones.
 - After discontinued ord wallet support for _new_ cursed Ordinals, the token-transfer function becomes dysfunctional and cursed tokens can only be transferred using "token-send" internally.
 
 #### Example
