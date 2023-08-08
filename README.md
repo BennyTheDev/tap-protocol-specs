@@ -78,6 +78,7 @@ The specs for "token-send" are defined as follows:
 - Upon tapping, invalid token sends may be skipped (e.g. insufficient funds).
 - Each successful token send must credit the given amounts to recipient and be removed from the sender's balance.
 - Since neither BRC20 nor TAP tokens are "cursed-aware", indexers need to check for negative inscription numbers to separate cursed tokens from non-cursed ones.
+- After discontinued ord wallet support for _new_ cursed Ordinals, the token-transfer function becomes disfunctional and cursed tokens can only be transferred using "token-send" internally.
 
 #### Example
 
