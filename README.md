@@ -81,6 +81,7 @@ The specs for "token-send" are defined as follows:
 - "token-send" is atomic upon inscribing (before tapping): all amounts, tickers and addresses must be valid.
 - Upon tapping, invalid token sends may be skipped (e.g. insufficient funds).
 - Each successful token send must credit the given amounts to recipient and be removed from the sender's balance.
+- Each send item must validate the available balances (available = balance - transferable). [added Aug. 8th, 2023]
 - After discontinued ord wallet support for _new_ cursed Ordinals, the token-transfer function becomes dysfunctional and cursed tokens can only be transferred using "token-send" internally. [added Aug. 8th, 2023]
 
 #### Example
