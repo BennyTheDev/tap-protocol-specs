@@ -19,7 +19,7 @@ Since neither BRC20 nor TAP tokens are "cursed-aware", indexers with cursed supp
 
 Alongside these specs, there is already TAP protocol tracking available on https://trac.network. 
 
-The description for the public endpoint will be published in the coming days on Github. This allows developers to embrace the new standard. After the official release of Trac, developers may self-host TAP tracking and create their own endpoints.
+Trac's public endpoint (https://github.com/BennyTheDev/trac-tap-public-endpoint) allows developers to embrace the new standard. After the official release of Trac, developers may self-host TAP tracking and create their own endpoints.
 
 # Specs
 #### External
