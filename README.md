@@ -82,7 +82,7 @@ The specs for "token-send" are defined as follows:
 - Upon tapping, invalid token sends may be skipped (e.g. insufficient funds).
 - Each successful token send must credit the given amounts to recipient and be removed from the sender's balance.
 - Each send item must validate the available balances (available = balance - transferable). [added Aug. 8th, 2023]
-- After discontinued ord wallet support for _new_ cursed Ordinals, the token-transfer function becomes dysfunctional and cursed tokens can only be transferred using "token-send" internally.
+- After discontinued ord wallet support for _new_ cursed Ordinals, the token-transfer function becomes dysfunctional for cursed tokens and can only be transferred using "token-send" internally. [added Aug. 8th, 2023]
 - From the moment of discontinued cursed support (the 1st block), cursed tokens have to be prefixed with a dash in the "tick" attributes of "token-send" [added Aug. 8th, 2023]
 
 #### Example
