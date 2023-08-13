@@ -11,15 +11,21 @@ The BRC-20 ticker lengths 1,2 and 4 are reserved for future interordinal bridgin
 
 TAP consists of two parts, external and internal. The external part acts in the exact same way like BRC-20 does. 
 
-External:  Centralized/custodial marketplaces clone their existing BRC-20 infrastructure to get connected to TAP. From there on out, TAP tokens can be traded like regular BRC-20 tokens on their platforms. Decentralized marketplaces/wallets that render wallet token balances should either implement the full protocol, including internal functions (see below), or check endpoints that implement the full protocol (e.g. https://github.com/BennyTheDev/trac-tap-public-endpoint). [updated Aug. 13th, 2023]
+* External:  
 
-Internal: Users benefit from features such as token staking and swaps. Mass-sending of tokens are already available. The community will decide through the use of $TRAC (BRC-20) which features will be added or updated.
+To get connected to TAP, marketplaces/wallets clone their existing BRC-20 infrastructure. Then either TAP's internal functions (see below) have to be implemented or endpoints that implement those have to be used to verify all balances (balance, available, transferable). From there on out, TAP tokens can be traded like regular BRC-20 tokens on their platforms. [updated Aug. 13th, 2023]
+
+* Internal
+
+Users benefit from features such as token staking and swaps. Mass-sending of tokens are already available. The community will decide through the use of $TRAC (BRC-20) which features will be added or updated.
 
 Since neither BRC20 nor TAP tokens are "cursed-aware", indexers with cursed support need to check for negative inscription numbers to separate cursed tokens from non-cursed ones. [added Aug. 8th, 2023]
 
 Alongside these specs, there is already TAP protocol tracking available on https://trac.network. 
 
 Trac's public endpoint (https://github.com/BennyTheDev/trac-tap-public-endpoint) allows developers to embrace the new standard. After the official release of Trac, developers may self-host TAP tracking and create their own endpoints.
+
+Protocol updates will be announced in advance - with a reasonable grace-period - to allow indexers to follow. [added Aug. 13th, 2023]
 
 # Specs
 #### External
