@@ -11,11 +11,11 @@ The BRC-20 ticker lengths 1,2 and 4 are reserved for future interordinal bridgin
 
 TAP consists of two parts, external and internal. The external part acts in the exact same way like BRC-20 does. 
 
-* External:  
+**External:**
 
 To get connected to TAP, marketplaces/wallets clone their existing BRC-20 infrastructure. Then either TAP's internal functions (see below) have to be implemented or endpoints that implement those have to be used to verify all balances (balance, available, transferable). From there on out, TAP tokens can be traded like regular BRC-20 tokens on their platforms. [updated Aug. 13th, 2023]
 
-* Internal
+**Internal:**
 
 Users benefit from features such as token staking and swaps. Mass-sending of tokens are already available. The community will decide through the use of $TRAC (BRC-20) which features will be added or updated.
 
