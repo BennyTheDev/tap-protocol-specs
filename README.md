@@ -77,11 +77,11 @@ The specs for "token-send" are defined as follows:
 - After the transaction confirmed, the inscription has to be resent to the same address for confirmation (tapping).
 - Upon tapping, the Bitcoin address must own the the amounts of tokens that are given with the inscription.
 - Only if the "token-send" inscription is tapped, sending tokens will be performed.
-- The receiver addresses must be carefully validated: must be valid Bitcoin addresses, trimming is allowed, addresses starting with bc1 have to be lowercased.
+- The receiver addresses must be carefully validated: must be valid Bitcoin addresses, must be trimmed, addresses starting with bc1 have to be lowercased.
 - "token-send" is atomic upon inscribing (before tapping): all amounts, tickers and addresses must be valid.
-- Upon tapping, invalid token sends may be skipped (e.g. insufficient funds).
+- Upon tapping, invalid token sends must be skipped (e.g. insufficient funds, invalid amounts or data types).
 - Each successful token send must credit the given amounts to recipient and be removed from the sender's balance.
-- Each send item must validate the available balances (available = balance - transferable). [added Aug. 8th, 2023]
+- Each send item must exclusively operate on available balances, not overall balances (available = balance - transferable). [added Aug. 8th, 2023]
 - After discontinued ord wallet support for _new_ cursed Ordinals, the token-transfer function becomes dysfunctional for cursed tokens and can only be transferred using "token-send" internally. [added Aug. 8th, 2023]
 - From the moment of discontinued cursed support (the 1st block), cursed tokens have to be prefixed with a dash in the "tick" attributes of "token-send" [added Aug. 8th, 2023]
 
