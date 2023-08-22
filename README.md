@@ -39,7 +39,9 @@ As mentioned above, TAP tokens work in the exact same way as BRC-20 tokens. Ther
 | Mint op | token-mint  | mint  |
 | Transfer op | token-transfer  | transfer  |
 
-If the indexer does _not_ support cursed tokens, a check must be added that excludes tokens derived from cursed Ordinals, for all of the external functions above. (inscription number is < 0). [added Aug. 8th, 2023]
+Leading dashes in tickers are not allowed for any function's "tick" attribute in its json root. (internal or external). This restriction is valid until the support for new cursed for Ordinals ended. From the first block after ended cursed support, the leading dash limitation must be lifted. From this moment on, previously cursed tokens must be addressed with dash prefixes and tokens may have leading dashes. [added Aug. 22nd, 2023]
+
+If the indexer does _not_ support cursed tokens, a check must be added that excludes tokens derived from cursed Ordinals, for all of the external functions above and below. (inscription number is < 0). [added Aug. 8th, 2023]
 
 #### Examples
 
@@ -88,8 +90,7 @@ The specs for "token-send" are defined as follows:
 - Upon tapping, invalid token sends must be skipped (e.g. insufficient funds, invalid amounts or data types).
 - Each successful token send must credit the given amounts to recipient and be removed from the sender's balance.
 - Each send item must exclusively operate on available balances, not overall balances (available = balance - transferable). [added Aug. 8th, 2023]
-- After discontinued ord wallet support for _new_ cursed Ordinals, the token-transfer function becomes dysfunctional for cursed tokens and can only be transferred using "token-send" internally. [added Aug. 8th, 2023]
-- From the moment of discontinued cursed support (the 1st block), cursed tokens have to be prefixed with a dash in the "tick" attributes of "token-send" [added Aug. 8th, 2023]
+- There is _no_ difference between cursed and non-cursed tokens in the "items" attribute. Cursed tokens have to be addressed using a leading dash (unlike functions' "tick" attribute in the json root). This is to enable token-send, to mix cursed and non-cursed tickers in the same transaction.
 
 #### Example
 
