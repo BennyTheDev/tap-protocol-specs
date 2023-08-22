@@ -90,7 +90,7 @@ The specs for "token-send" are defined as follows:
 - Upon tapping, invalid and semantically incorrect token sends must be skipped (e.g. insufficient funds, invalid amounts or invalid data types).
 - Each successful token send must credit the given amounts to recipient and be removed from the sender's balance.
 - Each send item must exclusively operate on available balances, not overall balances (available = balance - transferable). [added Aug. 8th, 2023]
-- There is _no_ difference between cursed and non-cursed tokens in the "items" attribute. Cursed tokens have to be addressed using a leading dash (unlike functions' "tick" attribute in the json root). This is to enable token-send, to mix cursed and non-cursed tickers in the same transaction. [added Aug. 22nd, 2023]
+- There is _no_ difference between cursed and non-cursed tokens in the "items" attribute. Cursed tokens have to be addressed using a leading dash (unlike functions' "tick" attribute in the json root). This is to enable token-send to mix cursed and non-cursed tickers in the same transaction. [added Aug. 22nd, 2023]
 
 #### Example
 
@@ -103,7 +103,7 @@ There is no restriction on the amount of items (receivers).
   "op" : "token-send",
   "items" : [
      {
-      "tick": "tap",
+      "tick": "-tap",
       "amt": "10000",
       "address" : "bc1p9lpne8pnzq87dpygtqdd9vd3w28fknwwgv362xff9zv4ewxg6was504w20"
      },
