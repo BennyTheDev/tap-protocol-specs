@@ -73,7 +73,9 @@ If the indexer does _not_ support cursed tokens, a check must be added that excl
 }
 ```
 
-#### Internal
+# Internal
+
+#### token-send
 
 Internally, there exists a new function called "token-send", which enables mass-transfer of different tokens to many recipients.
 
@@ -115,6 +117,107 @@ There is no restriction on the amount of items (receivers).
   ]
 }
 ```
+
+#### token-trade
+
+The internal function set "token-trade" consists of 3 functions to allow text-inscription based trading. By inscribing a trade inscription as seller, a trade is being added to the Ordinals collection and can be picked up by any buyer for the duration of a valid period in blocks. 
+
+Upon filling a trade by the buyer, an optional fee receiver address may be added to receive fixed 0.3% fees in tokens per filled trade. Fees are applied on top of the purchased token and is being paid by the buyer. Fees give inscription services and marketplaces a way to benefit from internal trading, while buyers benefit from the convenience and guidance of their services.
+
+To inscribe a trade, a seller has to inscribe a text inscription in the following format:
+
+#### Creating a Trade
+
+```javascript
+{
+  "p" : "tap",
+  "op" : "token-trade",
+  "side" : "0",
+  "tick" : "tap",
+  "amt" : "1",
+  "accept" : [
+    {
+      "tick" : "buidl",
+      "amt" : "0.1"
+    },
+    {
+      "tick" : "based",
+      "amt" : "0.2"
+    }
+  ],
+  "valid" : "900000"
+}
+```
+
+As soon as the inscription above is inscribed, the trade is open and ready to be filled under the following conditions:
+
+- All attributes are mandatory as of the example above.
+- Side = 0 specifies that this is a trade function by a seller.
+- The seller must own the offered token amount in the moment of filling the trade by a buyer.
+- The offered token amount must be deducted from the available balances, not overall balances (available = balance - transferable).
+- The tokens defined in the "accept" attribute represent accepted tokens for the trade.
+- If any of the accepted tokens are being used by the buyer, the trade concludes. 
+- The tokens defined in the "accept" attribute must be deployed in the moment of filling the trade by a buyer.
+- The block specified in the "valid" attribute must be a future block (inclusive).
+- The trade is invalid and not being indexed if the current block is larger than "valid".
+- If the offered tokens is cursed, then the inscription has to be inscribed as a cursed one.
+- Ticks within the "accept" attribute must be unique. Only the first must be indexed if there is more than one of the same.
+- Cursed tokens defined in the "accept" attribute have to be prefixed with a dash (this is to allow mixed cursed/non-cursed trading).
+- As soon as cursed support ends for new inscriptions (1st block), the offered token ticker has to be prefixed with a dash, too if it originally has been a cursed token.
+- After inscribing the function, sellers have to send the inscription to themselves to approve (tapping).
+
+#### Cancel a Trade
+
+In order to cancel an existing, non-expired trade. The following function has to be inscribed and tapped:
+
+```javascript
+{
+  "p" : "tap",
+  "op" : "token-trade",
+  "side" : "0",
+  "trade" : "<inscription id>"
+}
+```
+
+- All attributes are mandatory as of the example above.
+- Side = 0 specifies that this is a trade function by a seller.
+- The "trade" attribute has to be populated with the inscription id (_not_ number) of the referenced trade inscription above.
+- The trade will only cancel if the referenced trade inscription is owned by wallet address that intends to cancel.
+- After a trade has been cancelled, no trades for it can occur.
+- After inscribing the function, sellers have to send the inscription to themselves to approve (tapping).
+
+#### Fill a Trade
+
+Valid trades are fillable by inscribing a token-trade inscription that specifies which offered token to purchase, with a reference to the original trade inscription. Additionally, an optional fee receiver may be specified. The fee receiver will earn fixed 0.3% of the token that the buyer is purchasing. The fee is applied on top of the purchase amount.
+
+```javascript
+{
+  "p" : "tap",
+  "op" : "token-trade",
+  "side" : "1",
+  "trade" : "<inscription id>",
+  "tick" : "based",
+  "amt" : "0.2",
+  "fee_rcv" : "<fee receiver address>"
+}
+```
+
+- Except "fee_rcv", all attributes are mandatory as of the example above.
+- Side = 1 specifies that this is a trade function by a buyer.
+- The "trade" attribute must match the original trade inscription id (_not_ number).
+- The "tick" and "amt" attributes must exactly match one of the offered tokens from the referenced trade inscription.
+- The buyer must _not_ fill all accepted tokens as of the referenced trade but exactly one.
+- The ticker must be deployed in order to get the above indexed.
+- The buyer must own the specified token and it's amount + 0.3% trading fees if the "fee_rcv" attribute is set.
+- If the "fee_rcv" attribute is set, it must be a valid Bitcoin address.
+- Upon indexing, the Bitcoin address in "fee_rcv" must be trimmed and lowercased if the address starts with "bc1".
+- If the token in the "tick" attribute is a cursed one, the inscription has to be inscribed as cursed.
+- As soon as cursed support ends for new inscriptions (1st block), the "tick" attribute must reference cursed tokens with a leading dash.
+- After inscribing the function, buyers have to send the inscription to themselves to approve (tapping).
+- If the current block upon tapping is larger than the block in the "valid" attribute as of the referenced trade, filling will fail.
+- If all conditions are met, the token and its exact amount is being sent to the seller and the offered token is being sent to the buyer. If fees apply, the fee will be sent to the fee receiver.
+- Fees are only applicable on amounts and decimals that allow 0.3% to be applied. This means there may be zero fees if not applicable.
+- A trade has been filled successfully from an indexer point of view, if all conditions are met and all balances are credited correctly.
 
 #### Outlook
 
