@@ -39,7 +39,7 @@ As mentioned above, TAP tokens work in the exact same way as BRC-20 tokens. Ther
 | Mint op | token-mint  | mint  |
 | Transfer op | token-transfer  | transfer  |
 
-Leading dashes in tickers are not allowed for any function's "tick" attribute in its json root. (internal or external). This restriction is valid until the support for new cursed for Ordinals ended. From the first block after ended cursed support, the leading dash limitation must be lifted. From this moment on, previously cursed tokens must be addressed with dash prefixes and tokens may have leading dashes. [added Aug. 22nd, 2023]
+Leading dashes in tickers are not allowed for any function's "tick" attribute in its json root. (internal or external). This restriction is valid until the support for new cursed for Ordinals ended. From the first block after ended cursed support, the leading dash limitation must be lifted. From this moment on, already existing cursed tokens must be addressed with dash prefixes and _new_ tokens may have leading dashes. [added Aug. 22nd, 2023]
 
 If the indexer does _not_ support cursed tokens, a check must be added that excludes tokens derived from cursed Ordinals, for all of the external functions above and below. (inscription number is < 0). [added Aug. 8th, 2023]
 
