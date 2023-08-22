@@ -86,11 +86,11 @@ The specs for "token-send" are defined as follows:
 - Upon tapping, the Bitcoin address must own the the amounts of tokens that are given with the inscription.
 - Only if the "token-send" inscription is tapped, sending tokens will be performed.
 - The receiver addresses must be carefully validated: must be valid Bitcoin addresses, must be trimmed, addresses starting with bc1 have to be lowercased.
-- "token-send" is atomic upon inscribing (before tapping): all amounts, tickers and addresses must be valid.
-- Upon tapping, invalid token sends must be skipped (e.g. insufficient funds, invalid amounts or data types).
+- "token-send" is atomic upon inscribing (before tapping): all amounts, tickers and addresses must be syntactically valid.
+- Upon tapping, invalid and semantically incorrect token sends must be skipped (e.g. insufficient funds, invalid amounts or invalid data types).
 - Each successful token send must credit the given amounts to recipient and be removed from the sender's balance.
 - Each send item must exclusively operate on available balances, not overall balances (available = balance - transferable). [added Aug. 8th, 2023]
-- There is _no_ difference between cursed and non-cursed tokens in the "items" attribute. Cursed tokens have to be addressed using a leading dash (unlike functions' "tick" attribute in the json root). This is to enable token-send, to mix cursed and non-cursed tickers in the same transaction.
+- There is _no_ difference between cursed and non-cursed tokens in the "items" attribute. Cursed tokens have to be addressed using a leading dash (unlike functions' "tick" attribute in the json root). This is to enable token-send, to mix cursed and non-cursed tickers in the same transaction. [added Aug. 22nd, 2023]
 
 #### Example
 
