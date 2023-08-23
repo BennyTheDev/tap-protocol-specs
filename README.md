@@ -205,7 +205,7 @@ Valid trades are fillable by inscribing a token-trade inscription that specifies
 - Except "fee_rcv", all attributes are mandatory as of the example above.
 - Side = 1 specifies that this is a trade function by a buyer.
 - The "trade" attribute must match the original trade inscription id (_not_ number).
-- The "tick" and "amt" attributes must exactly match one of the offered tokens from the referenced trade inscription.
+- The "tick" and "amt" attributes must exactly match one of the accepted tokens from the referenced trade inscription.
 - The buyer must _not_ fill all accepted tokens as of the referenced trade but exactly one.
 - The ticker must be deployed in order to get the above indexed.
 - The buyer must own the specified token and it's amount + 0.3% trading fees if the "fee_rcv" attribute is set.
