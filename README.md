@@ -27,8 +27,8 @@ Trac's public endpoint (https://github.com/BennyTheDev/trac-tap-public-endpoint)
 
 Protocol updates will be announced in advance - with a reasonable grace-period - to allow indexers to follow. [added Aug. 13th, 2023]
 
-# Specs
-#### External
+# External
+
 As mentioned above, TAP tokens work in the exact same way as BRC-20 tokens. There are however a couple of minor modifications required for indexers:
 
 || TAP | BRC-20 |
