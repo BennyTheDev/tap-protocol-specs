@@ -219,6 +219,109 @@ Valid trades are fillable by inscribing a token-trade inscription that specifies
 - Fees are only applicable on amounts and decimals that allow 0.3% to be applied. This means there may be zero fees if not applicable.
 - A trade has been filled successfully from an indexer point of view, if all conditions are met and all balances are credited correctly.
 
+#### token-auth
+
+The internal function set "token-auth" allows 3rd parties (authorities) to independently issue signed redeem inscriptions. These signed redeem inscriptions may be inscribed by anyone and authorized tokens being sent to recipients. This allows for custom logic to be specified about what tokens should go where and when. 
+
+This makes TAP basically a zero-knowledge protocol within Ordinals as it doesn't know the details of custom logic provided by 3rd parties. Unlike zk-rollups, token-auth relies solely on message signatures and does not require sequenzers or L2 mediators. 
+
+Typical use-cases for token-auth are gamification (e.g. convert points to tokens), token bridges, staking, reward systems, cross-chain marketplaces and more.
+
+#### Create an authority
+
+To create an authority, a special token-auth inscription must be sent and tapped with an address that holds authorized tokens.
+
+Manual creation of token-auth code is not recommended as it requires message signatures. See this example script that helps to generate signed token auths. Token-auth uses secp256k1 signatures. See https://github.com/paulmillr/noble-secp256k1 as an example implementation.
+
+Example:
+
+```javascript
+{
+   "p":"tap",
+   "op":"token-auth",
+   "sig":{
+      "v":"0",
+      "r":"51143521410606380758535576062355234772504706283689533465002520447203156100709",
+      "s":"23524754809729078525228087002160468580495709275023865450917881139756565577560"
+   },
+   "hash":"0f30c22be2f46e819538ca1281aadb82d3928cae5a699cade80013c5b14871e4",
+   "salt":"0.25991027744263695",
+   "auth":[
+      "gib"
+   ]
+}
+```
+
+- The "auth" attribute must contain an array of deployed TAP protocol tokens that are verified for the authority's account.
+- Upon indexing, the token-auth inscription must be verified against the signature ("sig"), "hash" attribute and public key.
+- - The public key must be recovered by using "hash".
+  - To prevent hash collisions, a custom "salt" value has to be provided by the authority.
+  - To verify, the "auth" array must be JSON-stringified and sha256-hashed with "salt" (sha256(auth + salt)).
+  - "hash" must be unique and can only be used once across the entire indexing state.
+  - Token-auth is atomic, this means that all tokens in "auth" must be deployed at the time of inscribing.
+  - The authority address does NOT need to own the authorized tokens (but should, upon redeeming, please see below).
+  - If all authorized tokens are deployed, the hashed signature is valid and the hash has never been used before, the token-auth inscription must be indexed after tapping (=sending to "yourself"). 
+
+#### Create a redeem
+
+Tokens to redeem are signed and issued by the authority. The inscription code may be inscribed by everyone and it is under the sole discretion of the authority when and how redeems are issued. Typically, an authority would sign and issue a redeem when all its conditions are met.
+
+Manual creation of token-auth code is not recommended as it requires message signatures. See this example script that helps to generate signed token auths. Token-auth uses secp256k1 signatures. See https://github.com/paulmillr/noble-secp256k1 as an example implementation.
+
+```javascript
+{
+   "p":"tap",
+   "op":"token-auth",
+   "sig":{
+      "v":"1",
+      "r":"113472523327934685528808901641630457916054343054143422440331961430719594721038",
+      "s":"21393407019197854961723689634443789868582208930187383447036700552814535514199"
+   },
+   "hash":"82e2b0d098dcdab820ff866b011250af8841a6b59cedd7164bb94b63d2598de9",
+   "salt":"0.46074583388095514",
+   "redeem":{
+      "items":[
+         {
+            "tick":"gib",
+            "amt":"546",
+            "address":"bc1p9lpne8pnzq87dpygtqdd9vd3w28fknwwgv362xff9zv4ewxg6was504w20"
+         }
+      ],
+      "auth":"fd3664a56cf6d14b21504e5d83a3d4867ee256f06cbe3bddf2787d6a80a86078i0",
+      "data":""
+   }
+}
+```
+
+- The "redeem" attribute must contain an object consisting of "redeem" => "items", the inscription id of the signing authority ("redeem" => ""auth") and "redeem" => "data".
+- Upon indexing, the token-auth inscription must be verified against the signature ("sig"), "hash" attribute and public key.
+- - The public key must be recovered by using "hash".
+  - To prevent hash collisions, a custom "salt" value has to be provided by the authority.
+  - To verify, the "auth" array must be JSON-stringified and sha256-hashed with "salt" (sha256(auth + salt)).
+  - "hash" must be unique and can only be used once across the entire indexing state.
+  - "redeem" => "data" must be present but may be empty.
+  - Based on the inscription id in "auth", the public key by the authority must be recovered and compared with the public key of the redeem.
+  - - Both public keys must match.
+    - Both hashes must be valid.
+    - The original auth inscription mustn't be cancelled.
+    - All tickers in "redeem" => "items" must be specified in the original "auth" inscription.
+- If all conditions are met, the tokens specified in "redeem" => "items" must be sent exactly like TAP's function "token-send" above, including all of its conditions. Tapping is not required, as this is a signed transaction and may be inscribed by everyone.
+
+#### Cancel an authority
+
+To cancel a "token-auth", the authority must send an inscription like below to its associated address and tap.
+
+```javascript
+{
+   "p":"tap",
+   "op":"token-auth",
+   "cancel" : "fd3664a56cf6d14b21504e5d83a3d4867ee256f06cbe3bddf2787d6a80a86078i0"
+}
+```
+
+- "cancel" must point to an existing an non-cancelled "token-auth" of the authority.
+- Once tapped, no further redeems may be executed on the inscribed "token-auth", indefinitely.
+
 #### Outlook
 
 This document and the tracking for the TAP protocol will be continuously worked on and updated. Feel free to join the Discord if you have questions: https://discord.gg/sPyYDa5q6P
