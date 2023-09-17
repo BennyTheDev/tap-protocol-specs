@@ -231,7 +231,7 @@ Typical use-cases for token-auth are gamification (e.g. convert points to tokens
 
 To create an authority, a special token-auth inscription must be sent and tapped with an address that holds authorized tokens.
 
-Manual creation of token-auth code is not recommended as it requires message signatures. See this example script that helps to generate signed token auths. Token-auth uses secp256k1 signatures. See https://github.com/paulmillr/noble-secp256k1 as an example implementation.
+Manual creation of token-auth code is not recommended as it requires message signatures. See the example script (https://github.com/BennyTheDev/tap-token-auth-signatures) that helps to generate signed token auths. Token-auth uses secp256k1 signatures. See https://github.com/paulmillr/noble-secp256k1 as an example implementation.
 
 Example:
 
