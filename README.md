@@ -261,9 +261,9 @@ Example:
   - To prevent hash collisions, a custom "salt" value has to be provided by the authority.
   - To verify, the "auth" array must be JSON-stringified and sha256-hashed with "salt" (sha256(auth + salt)).
   - "hash" must be unique and can only be used once across the entire indexing state.
-  - Token-auth is atomic, this means that all tokens in "auth" must be deployed at the time of inscribing.
-  - The authority address does NOT need to own the authorized tokens (but should, upon redeeming, please see below).
-  - If all authorized tokens are deployed, the hashed signature is valid and the hash has never been used before, the token-auth inscription must be indexed after tapping (=sending to "yourself"). 
+  - Token-auth is atomic, this means that all tokens in "auth" must be deployed at the time of inscribing (if the "auth" array is _not_ empty).
+  - The authority address does NOT need to own the authorized tokens at the time of inscribing (but should, upon redeeming, see below).
+  - If all authorized tokens are deployed or the "auth" array is empty, the hashed signature is valid and the hash has never been used before, the token-auth inscription must be indexed after tapping (=sending to "yourself"). 
 
 #### Create a redeem
 
