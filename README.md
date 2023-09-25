@@ -253,6 +253,7 @@ Example:
 ```
 
 - The "auth" attribute must contain an array of deployed TAP protocol tokens that are verified for the authority's account.
+- If the "auth" attribute's array is empty, all tokens owned by the authority's account are authorized [added Sep. 25th, 2023]
 - Upon indexing, the token-auth inscription must be verified against the signature ("sig"), "hash" attribute and public key.
 - - The public key must be recovered by using "hash".
   - To prevent hash collisions, a custom "salt" value has to be provided by the authority.
