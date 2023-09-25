@@ -225,6 +225,8 @@ The internal function set "token-auth" allows 3rd parties (authorities) to indep
 
 This makes TAP basically a zero-knowledge protocol within Ordinals as it doesn't know the details of custom logic provided by 3rd parties. Unlike zk-rollups, token-auth relies solely on message signatures and does not require sequenzers or L2 mediators. 
 
+token-auth does not rely on witness data hacking. All operations are clearly contained within the Ordinal envelope's data and thus easily provable by any indexer or individual.
+
 Typical use-cases for token-auth are gamification (e.g. convert points to tokens), token bridges, staking, reward systems, cross-chain marketplaces and more.
 
 #### Create an authority
