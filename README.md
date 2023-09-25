@@ -3,7 +3,7 @@ TAP is an extendible OrdFi-enabling protocol that includes - but is not limited 
 
 TAP works entirely without the use of L2 chains or other overly complex mechanics, but utilizes tapping - a simple mechanism to verify transactions within the protocol.
 
-The goal of TAP is not to replace or compete with BRC-20 but instead embraces it and allows for new features that will be consistently added to the protocol by community driven governance.
+The goal of TAP is to built upon what made BRC-20 great but maintaining independence from centralized entities. TAP allows for new features that will be consistently added to the protocol by community driven governance.
 
 The BRC-20 ticker lengths 1,2 and 4 are reserved for future interordinal bridging between BRC-20 and TAP Tokens and cannot be deployed on TAP.
 
@@ -223,7 +223,7 @@ Valid trades are fillable by inscribing a token-trade inscription that specifies
 
 The internal function set "token-auth" allows 3rd parties (authorities) to independently issue signed redeem inscriptions. These signed redeem inscriptions may be inscribed by anyone and authorized tokens being sent to recipients. This allows for custom logic to be specified about what tokens should go where and when. 
 
-This makes TAP basically a zero-knowledge protocol within Ordinals as it doesn't know the details of custom logic provided by 3rd parties. Unlike zk-rollups, token-auth relies solely on message signatures and does not require sequenzers or L2 mediators. 
+This makes TAP basically a no-knowledge protocol within Ordinals as it doesn't need to know the details of custom logic provided by 3rd parties. Unlike zk-rollups, token-auth relies solely on message signatures and does not require sequenzers or L2 mediators. Token-auth can even be used to connect with zk-rollup solutions, adding an extra layer of authenticity.
 
 token-auth does not rely on witness data hacking. All operations are clearly contained within the Ordinal envelope's data and thus easily provable by any indexer or individual.
 
