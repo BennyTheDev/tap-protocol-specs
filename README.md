@@ -40,8 +40,8 @@ As mentioned above, TAP tokens work in the exact same way as BRC-20 tokens. Ther
 #### Ord Wallet Versioning
 
 The TAP Protocol follows a defined upgrade path for indexers to support and benefit from ord wallet updates. Ord wallet upgrades are followed conservatively.
-This means that the protocol won't support every single release of the ord wallet but important updates. 
-Supported updates will be tested and announced in advance, with reasonable time to allow indexers to be prepared.
+This means that the protocol won't support every single release of the ord wallet but only important and beneficial updates. 
+Supported updates will be tested and announced in advance, with a reasonable time to allow indexers to be prepared.
 
 Indexers must make sure to follow the ord wallet versions and activation heights as of the table below:
 
@@ -56,9 +56,10 @@ From block 824544 onwards, no new cursed inscriptions may be inscribed any longe
 
 For external functions this means:
 
-- Until block 824543, token-deploy, token-mint and token-transfer must be inscribed as cursed. Without dash in the ticker.
+- Until block 824543, cursed inscriptions using token-deploy, token-mint and token-transfer must be addressed without dash in the ticker. Indexers must internally prefix those with a dash to separate them from their non-cursed counterparts.
 - From block 824544 onwwards, no cursed tokens may be deployed or minted any longer. Tickers in token-transfer must be prefixed with a dash for cursed tokens.
 - Transferable inscriptions are not affected and can be sent to a recipient at any time.
+- Generally, no tokens can be deployed with a leading dash in token-deploy. Those would be invalid and rejected from being indexed.
 
 #### Examples
 
