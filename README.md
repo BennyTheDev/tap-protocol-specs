@@ -45,7 +45,7 @@ Supported updates will be tested and announced in advance, with reasonable time 
 
 Indexers must make sure to follow the ord wallet versions and activation heights as of the table below:
 
-|| Ord Wallet | Block Activation Height |
+| Ord Wallet | Block Activation Height |
 |------------- | ------------- |
 | 0.14.1 | 801993 |
 | 1.0 | TBA |
