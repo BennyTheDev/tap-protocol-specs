@@ -19,9 +19,7 @@ To get connected to TAP, marketplaces/wallets clone their existing BRC-20 infras
 
 Users benefit from features such as token staking and swaps. Mass-sending of tokens are already available. The community will decide through the use of $TRAC (BRC-20) which features will be added or updated.
 
-Since neither BRC20 nor TAP tokens are "cursed-aware", indexers with cursed support need to check for negative inscription numbers to separate cursed tokens from non-cursed ones. [added Aug. 8th, 2023]
-
-Alongside these specs, there is already TAP protocol tracking available on https://trac.network. 
+Alongside the specs, there is already TAP protocol tracking available on https://trac.network. 
 
 Trac's public endpoint (https://github.com/BennyTheDev/trac-tap-public-endpoint) allows developers to embrace the new standard. After the official release of Trac, developers may self-host TAP tracking and create their own endpoints.
 
@@ -39,9 +37,28 @@ As mentioned above, TAP tokens work in the exact same way as BRC-20 tokens. Ther
 | Mint op | token-mint  | mint  |
 | Transfer op | token-transfer  | transfer  |
 
-Leading dashes in tickers are not allowed for any function's "tick" attribute in its json root. (internal or external). This restriction is valid until the support for new cursed for Ordinals ended. From the first block after ended cursed support, the leading dash limitation must be lifted. From this moment on, already existing cursed tokens must be addressed with dash prefixes and _new_ tokens may have leading dashes. [added Aug. 22nd, 2023]
+#### Ord Wallet Versioning
 
-If the indexer does _not_ support cursed tokens, a check must be added that excludes tokens derived from cursed Ordinals, for all of the external functions above and below. (inscription number is < 0). [added Aug. 8th, 2023]
+The TAP Protocol follows a defined upgrade path for indexers to support and benefit from ord wallet updates. Ord wallet upgrades are followed conservatively.
+This means that the protocol won't support every single release of the ord wallet but important updates. 
+Supported updates will be tested and announced in advance, with reasonable time to allow indexers to be prepared.
+
+Indexers must make sure to follow the ord wallet versions and activation heights as of the table below:
+
+|| Ord Wallet | Block Activation Height |
+|------------- | ------------- |
+| 0.14.1 | 801993 |
+| 1.0 | TBA |
+
+#### The Jubilee
+
+From block 824544 onwards, no new cursed inscriptions may be inscribed any longer. Before this block, indexers have to support tokens that are deployed and minted as cursed inscriptions.
+
+For external functions this means:
+
+- Until block 824543, token-deploy, token-mint and token-transfer must be inscribed as cursed. Without dash in the ticker.
+- From block 824544 onwwards, no cursed tokens may be deployed or minted any longer. Tickers in token-transfer must be prefixed with a dash for cursed tokens.
+- Transferable inscriptions are not affected and can be sent to a recipient at any time.
 
 #### Examples
 
@@ -160,10 +177,10 @@ As soon as the inscription above is inscribed, the trade is open and ready to be
 - The tokens defined in the "accept" attribute must be deployed in the moment of filling the trade by a buyer.
 - The block specified in the "valid" attribute must be a future block (inclusive).
 - The trade is invalid and not being indexed if the current block is larger than "valid".
-- If the offered tokens is cursed, then the inscription has to be inscribed as a cursed one.
+- Up to block 824543 and if the offered token is cursed, then the inscription has to be inscribed as cursed.
 - Ticks within the "accept" attribute must be unique. Only the first must be indexed if there is more than one of the same.
 - Cursed tokens defined in the "accept" attribute have to be prefixed with a dash (this is to allow mixed cursed/non-cursed trading).
-- As soon as cursed support ends for new inscriptions (1st block), the offered token ticker has to be prefixed with a dash, too if it originally has been a cursed token.
+- From block 824544 onwards, the offered token ticker has to be prefixed with a dash, if it originally has been deployed as cursed token.
 - After inscribing the function, sellers have to send the inscription to themselves to approve (tapping).
 
 #### Cancel a Trade
@@ -211,8 +228,8 @@ Valid trades are fillable by inscribing a token-trade inscription that specifies
 - The buyer must own the specified token and it's amount + 0.3% trading fees if the "fee_rcv" attribute is set.
 - If the "fee_rcv" attribute is set, it must be a valid Bitcoin address.
 - Upon indexing, the Bitcoin address in "fee_rcv" must be trimmed and lowercased if the address starts with "bc1".
-- If the token in the "tick" attribute is a cursed one, the inscription has to be inscribed as cursed.
-- As soon as cursed support ends for new inscriptions (1st block), the "tick" attribute must reference cursed tokens with a leading dash.
+- Up to block 824543 and if the offered token is cursed, then the inscription has to be inscribed as cursed.
+- From block 824544 onwards, the "tick" attribute has to be prefixed with a dash, if it originally has been deployed as cursed token.
 - After inscribing the function, buyers have to send the inscription to themselves to approve (tapping).
 - If the current block upon tapping is larger than the block in the "valid" attribute as of the referenced trade, filling will fail.
 - If all conditions are met, the token and its exact amount is being sent to the seller and the offered token is being sent to the buyer. If fees apply, the fee will be sent to the fee receiver.
