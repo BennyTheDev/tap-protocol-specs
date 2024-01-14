@@ -345,6 +345,7 @@ To cancel a "token-auth", the authority must send an inscription like below to i
 #### DMT (Digital Matter Theory) Tokens
 
 TAP Protocol supports element field 11 as of the DMT specs located at https://digital-matter-theory.gitbook.io/digital-matter-theory/introduction/digital-matter-theory
+This includes the functions "dmt-deploy" and "dmt-mint" and work according to the DMT specs within the TAP Protocol.
 
 #### Outlook
 
