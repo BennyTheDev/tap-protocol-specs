@@ -342,6 +342,10 @@ To cancel a "token-auth", the authority must send an inscription like below to i
 - "cancel" must point to an existing an non-cancelled "token-auth" of the authority.
 - Once tapped, no further redeems may be executed on the inscribed "token-auth", indefinitely.
 
+#### DMT (Digital Matter Theory) Tokens
+
+TAP Protocol supports element field 11 as of the DMT specs located at https://digital-matter-theory.gitbook.io/digital-matter-theory/introduction/digital-matter-theory
+
 #### Outlook
 
 This document and the tracking for the TAP protocol will be continuously worked on and updated. Feel free to join the Discord if you have questions: https://discord.gg/sPyYDa5q6P
